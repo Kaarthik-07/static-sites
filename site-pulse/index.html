@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Pulse Studio — an independent design & engineering studio crafting bold digital experiences." />
+  <title>Pulse Studio — Design & Engineering</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ===== PRELOADER ===== -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__inner">
+      <span class="loader__count" id="loaderCount">0</span>
+      <span class="loader__pct">%</span>
+    </div>
+    <div class="loader__bar"><i id="loaderBar"></i></div>
+  </div>
+
+  <!-- ===== CUSTOM CURSOR ===== -->
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+
+  <!-- ===== NAV ===== -->
+  <header class="nav" id="nav">
+    <a href="#top" class="nav__logo" data-hover>PULSE<span>°</span></a>
+    <nav class="nav__menu" aria-label="Primary">
+      <a href="#work" data-hover>Work</a>
+      <a href="#about" data-hover>Studio</a>
+      <a href="#skills" data-hover>Skills</a>
+      <a href="#contact" data-hover>Contact</a>
+    </nav>
+    <a href="#contact" class="nav__cta" data-hover>Let's talk →</a>
+    <button class="nav__burger" id="burger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#work">Work</a>
+    <a href="#about">Studio</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="top">
+    <div class="hero__noise" aria-hidden="true"></div>
+    <div class="container">
+      <p class="hero__kicker" data-reveal>Independent studio — est. 2019</p>
+
+      <h1 class="hero__title">
+        <span class="line" data-reveal>WE CRAFT</span>
+        <span class="line line--accent" data-reveal data-delay="120">DIGITAL</span>
+        <span class="line" data-reveal data-delay="240">
+          <span id="typewriter" class="typewriter">experiences</span><span class="type-caret" aria-hidden="true"></span>
+        </span>
+      </h1>
+
+      <div class="hero__bottom" data-reveal data-delay="360">
+        <p>
+          Pulse is a design &amp; engineering studio building fast, weird,
+          memorable products for brands that refuse to blend in.
+        </p>
+        <div class="hero__scroll" aria-hidden="true">
+          <span>Scroll</span>
+          <i></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero__ticker" aria-hidden="true">
+      <div class="ticker__track">
+        <span>BRANDING</span><i>✦</i><span>WEB DESIGN</span><i>✦</i><span>WEBGL</span><i>✦</i>
+        <span>MOTION</span><i>✦</i><span>DEVELOPMENT</span><i>✦</i><span>STRATEGY</span><i>✦</i>
+        <span>BRANDING</span><i>✦</i><span>WEB DESIGN</span><i>✦</i><span>WEBGL</span><i>✦</i>
+        <span>MOTION</span><i>✦</i><span>DEVELOPMENT</span><i>✦</i><span>STRATEGY</span><i>✦</i>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WORK ===== -->
+  <section class="section" id="work">
+    <div class="container">
+      <div class="section__head" data-reveal>
+        <span class="index">01 — Selected work</span>
+        <h2>Projects we're<br />proud of.</h2>
+      </div>
+
+      <div class="work">
+        <a href="#" class="work__item" data-reveal>
+          <div class="work__media" style="--c1:#ff5ca8; --c2:#7c5cff;">
+            <span class="work__num">01</span>
+            <div class="work__shape"></div>
+          </div>
+          <div class="work__info">
+            <h3>Neon Bank</h3>
+            <p>Fintech rebrand + product design</p>
+            <span class="work__tags">Branding · UI · Motion</span>
+          </div>
+        </a>
+
+        <a href="#" class="work__item work__item--offset" data-reveal data-delay="100">
+          <div class="work__media" style="--c1:#21d4fd; --c2:#3ddc97;">
+            <span class="work__num">02</span>
+            <div class="work__shape work__shape--ring"></div>
+          </div>
+          <div class="work__info">
+            <h3>Orbital OS</h3>
+            <p>Dashboard for satellite operators</p>
+            <span class="work__tags">Product · Data Viz · WebGL</span>
+          </div>
+        </a>
+
+        <a href="#" class="work__item" data-reveal>
+          <div class="work__media" style="--c1:#ffb454; --c2:#ff5c5c;">
+            <span class="work__num">03</span>
+            <div class="work__shape work__shape--bars"></div>
+          </div>
+          <div class="work__info">
+            <h3>Ferro Coffee</h3>
+            <p>E-commerce with a personality</p>
+            <span class="work__tags">Shopify · Art Direction</span>
+          </div>
+        </a>
+
+        <a href="#" class="work__item work__item--offset" data-reveal data-delay="100">
+          <div class="work__media" style="--c1:#a78bfa; --c2:#21d4fd;">
+            <span class="work__num">04</span>
+            <div class="work__shape work__shape--grid"></div>
+          </div>
+          <div class="work__info">
+            <h3>Studio Kern</h3>
+            <p>Portfolio site for an architecture firm</p>
+            <span class="work__tags">Next.js · CMS · SEO</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT / PARALLAX ===== -->
+  <section class="section section--alt" id="about">
+    <div class="container about">
+      <div class="about__media" data-parallax="0.06" data-reveal>
+        <div class="about__block about__block--1"></div>
+        <div class="about__block about__block--2"></div>
+        <div class="about__block about__block--3">
+          <span>8</span>
+          <small>humans,<br />zero middlemen</small>
+        </div>
+      </div>
+
+      <div class="about__copy">
+        <span class="index" data-reveal>02 — The studio</span>
+        <h2 data-reveal data-delay="80">Small team.<br />Loud output.</h2>
+        <p data-reveal data-delay="160">
+          We're a tight crew of designers and engineers who believe the web
+          should feel like something. No templates, no bloated frameworks —
+          just sharp thinking and handcrafted code.
+        </p>
+        <p data-reveal data-delay="240">
+          Every project gets a senior team, a short timeline, and a bias
+          toward shipping. If it doesn't make you feel something, we redo it.
+        </p>
+
+        <div class="about__facts" data-reveal data-delay="320">
+          <div><b data-count="120" data-suffix="+">0+</b><span>Projects shipped</span></div>
+          <div><b data-count="14" data-suffix="">0</b><span>Awards won</span></div>
+          <div><b data-count="6" data-suffix="w">0w</b><span>Avg. timeline</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SKILLS ===== -->
+  <section class="section" id="skills">
+    <div class="container">
+      <div class="section__head" data-reveal>
+        <span class="index">03 — Capabilities</span>
+        <h2>What we do best.</h2>
+      </div>
+
+      <div class="skills">
+        <div class="skill" data-reveal>
+          <div class="skill__top"><span>Product Design</span><b data-skill-label>0%</b></div>
+          <div class="skill__track"><i data-skill="96"></i></div>
+        </div>
+        <div class="skill" data-reveal data-delay="80">
+          <div class="skill__top"><span>Front-End Engineering</span><b data-skill-label>0%</b></div>
+          <div class="skill__track"><i data-skill="92"></i></div>
+        </div>
+        <div class="skill" data-reveal data-delay="160">
+          <div class="skill__top"><span>Motion &amp; 3D</span><b data-skill-label>0%</b></div>
+          <div class="skill__track"><i data-skill="85"></i></div>
+        </div>
+        <div class="skill" data-reveal data-delay="240">
+          <div class="skill__top"><span>Brand Strategy</span><b data-skill-label>0%</b></div>
+          <div class="skill__track"><i data-skill="78"></i></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section class="section section--contact" id="contact">
+    <div class="container">
+      <span class="index" data-reveal>04 — Contact</span>
+      <h2 class="contact__title" data-reveal data-delay="80">
+        Got a wild idea?<br />
+        <a href="mailto:hello@pulse.studio" class="contact__mail" data-hover>
+          hello@pulse.studio
+        </a>
+      </h2>
+
+      <form class="contact__form" id="contactForm" novalidate data-reveal data-delay="160">
+        <div class="field">
+          <input type="text" id="cName" placeholder=" " required />
+          <label for="cName">Your name</label>
+        </div>
+        <div class="field">
+          <input type="email" id="cEmail" placeholder=" " required />
+          <label for="cEmail">Email</label>
+        </div>
+        <div class="field field--full">
+          <textarea id="cMsg" rows="4" placeholder=" " required></textarea>
+          <label for="cMsg">Tell us about the project</label>
+        </div>
+        <button type="submit" class="btn-send" data-hover>Send it →</button>
+        <p class="contact__status" id="formStatus" role="status"></p>
+      </form>
+
+      <div class="contact__socials" data-reveal data-delay="240">
+        <a href="#" data-hover>Instagram</a>
+        <a href="#" data-hover>Dribbble</a>
+        <a href="#" data-hover>GitHub</a>
+        <a href="#" data-hover>LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span>© 2026 Pulse Studio</span>
+      <span class="footer__time" id="localTime">--:--:-- LOCAL</span>
+      <a href="#top" data-hover>Back to top ↑</a>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
