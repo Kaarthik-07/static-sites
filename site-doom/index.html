@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#04160e" />
+  <meta name="description" content="DOOM — the official terminal of Victor Von Doom, Sovereign of Latveria. All hail Doom. Hosted at dooom.online" />
+  <title>DOOM — Reign of Victor Von Doom · dooom.online</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2304160e'/%3E%3Cpath d='M18 14h16c11 0 18 8 18 18s-7 18-18 18H18z' fill='none' stroke='%2322ff88' stroke-width='7'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Cinzel:wght@600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <noscript><style>[data-reveal]{opacity:1 !important;transform:none !important}.preloader{display:none !important}</style></noscript>
+</head>
+<body>
+
+  <!-- ============ PRELOADER ============ -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader__inner">
+      <div class="preloader__mark">
+        <span>D</span><span>O</span><span>O</span><span>M</span>
+      </div>
+      <div class="preloader__bar"><i id="preloaderBar"></i></div>
+      <p class="preloader__status" id="preloaderStatus">INITIALISING LATVERIAN GRID</p>
+    </div>
+  </div>
+
+  <!-- ============ ATMOSPHERE OVERLAYS ============ -->
+  <div class="grain" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="lightning-flash" id="lightningFlash" aria-hidden="true"></div>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <!-- ============ CURSOR ============ -->
+  <div class="cursor" id="cursor" aria-hidden="true"><i class="cursor__ring"></i><i class="cursor__dot"></i></div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <div class="container nav__inner">
+      <a href="#home" class="brand" data-scramble-hover aria-label="DOOM home">
+        <span class="brand__glyph" aria-hidden="true">D</span>
+        <span class="brand__name">DOOM</span>
+        <span class="brand__tld">.online</span>
+      </a>
+
+      <nav class="nav__links" id="navLinks" aria-label="Primary">
+        <a href="#monarch" data-scramble-hover>Monarch</a>
+        <a href="#arsenal" data-scramble-hover>Arsenal</a>
+        <a href="#reign" data-scramble-hover>Reign</a>
+        <a href="#realms" data-scramble-hover>Realms</a>
+        <a href="#oath" class="btn btn--sm btn--primary" data-magnetic data-scramble-hover>Swear Fealty</a>
+      </nav>
+
+      <div class="nav__status" aria-hidden="true"><i class="pulse-dot"></i><span>LATVERIA-01 · SECURE</span></div>
+
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="home">
+      <canvas class="hero__fx" id="fx" aria-hidden="true"></canvas>
+      <div class="hero__grid" aria-hidden="true"></div>
+      <div class="hero__glow" aria-hidden="true"></div>
+
+      <div class="container hero__inner">
+        <p class="hero__badge" data-reveal>
+          <span class="hero__badge-dot"></span> LATVERIA · EST. MCMLXII · STATE TERMINAL
+        </p>
+
+        <div class="hero__stage" id="heroStage">
+          <h1 class="hero__word glitch" data-text="DOOM" data-reveal data-delay="60">DOOM</h1>
+
+          <div class="hero__mask" id="heroMask" data-reveal data-delay="180">
+            <svg viewBox="0 0 400 500" role="img" aria-label="Doctor Doom faceplate">
+              <defs>
+                <linearGradient id="steel" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#dbe7e0" />
+                  <stop offset=".3" stop-color="#93a49c" />
+                  <stop offset=".52" stop-color="#39463f" />
+                  <stop offset=".72" stop-color="#9db0a7" />
+                  <stop offset="1" stop-color="#465349" />
+                </linearGradient>
+                <linearGradient id="cloakG" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#0f7a48" />
+                  <stop offset=".55" stop-color="#0a4b2d" />
+                  <stop offset="1" stop-color="#04301d" />
+                </linearGradient>
+                <radialGradient id="eyeG" cx=".5" cy=".5" r=".5">
+                  <stop offset="0" stop-color="#e6fff2" />
+                  <stop offset=".45" stop-color="#2dff92" />
+                  <stop offset="1" stop-color="#06a35c" />
+                </radialGradient>
+                <linearGradient id="sweep" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0" stop-color="#fff" stop-opacity="0" />
+                  <stop offset=".5" stop-color="#c9ffe4" stop-opacity=".55" />
+                  <stop offset="1" stop-color="#fff" stop-opacity="0" />
+                </linearGradient>
+                <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+                  <feGaussianBlur stdDeviation="9" result="b" />
+                  <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+                </filter>
+              </defs>
+
+              <!-- cloak -->
+              <path d="M200 40C126 40 74 96 70 178L44 470h312l-26-292C326 96 274 40 200 40Z" fill="url(#cloakG)" />
+              <path d="M200 40C126 40 74 96 70 178L44 470h312l-26-292C326 96 274 40 200 40Z" fill="none" stroke="#04160e" stroke-width="3" />
+              <!-- hood cavity -->
+              <path d="M200 66c-70 0-114 54-112 134 2 96 52 176 112 204 60-28 110-108 112-204 2-80-42-134-112-134Z" fill="#04160e" />
+
+              <!-- faceplate -->
+              <path d="M200 78l86 34 18 96-16 96-44 66-44 42-44-42-44-62-16-100 18-96 86-34Z"
+                    fill="url(#steel)" stroke="#0d1512" stroke-width="4" stroke-linejoin="round" />
+              <!-- centre seam -->
+              <path d="M200 78v334" stroke="#0d1512" stroke-width="3" opacity=".55" />
+              <!-- brows -->
+              <path d="M114 116l84-24 2 36-84 22z" fill="#1a2420" opacity=".9" />
+              <path d="M286 116l-84-24-2 36 84 22z" fill="#1a2420" opacity=".9" />
+              <!-- eye slits -->
+              <path class="eye eye--l" d="M116 176l78-20-4 44-72 8z" />
+              <path class="eye eye--r" d="M284 176l-78-20 4 44 72 8z" />
+              <!-- nose ridge -->
+              <path d="M200 214l16 76-16 16-16-16z" fill="#26302b" stroke="#0d1512" stroke-width="3" stroke-linejoin="round" />
+              <!-- mouth grille -->
+              <rect x="150" y="322" width="100" height="46" rx="7" fill="#0b120f" stroke="#0d1512" stroke-width="3" />
+              <g stroke="url(#steel)" stroke-width="6" stroke-linecap="round">
+                <path d="M170 328v34" /><path d="M187 328v34" /><path d="M204 328v34" />
+                <path d="M221 328v34" /><path d="M238 328v34" />
+              </g>
+              <!-- chin plate -->
+              <path d="M176 376h48l-10 26-14 12-14-12z" fill="#2b3530" stroke="#0d1512" stroke-width="3" stroke-linejoin="round" />
+              <!-- rivets -->
+              <g fill="#202a26" stroke="#cfe0d7" stroke-width="2">
+                <circle cx="200" cy="94" r="5.5" /><circle cx="122" cy="132" r="5.5" />
+                <circle cx="278" cy="132" r="5.5" /><circle cx="104" cy="240" r="5.5" />
+                <circle cx="296" cy="240" r="5.5" /><circle cx="140" cy="340" r="5.5" />
+                <circle cx="260" cy="340" r="5.5" /><circle cx="200" cy="300" r="5.5" />
+              </g>
+              <!-- sweep highlight -->
+              <rect class="mask-sweep" x="0" y="0" width="90" height="500" fill="url(#sweep)" />
+            </svg>
+          </div>
+        </div>
+
+        <p class="hero__tag" data-reveal data-delay="260">
+          Sovereign. Sorcerer. Supreme. This terminal broadcasts from the throne room of
+          <strong>Latveria</strong> — and it never bows to anyone but <strong>Doom</strong>.
+        </p>
+
+        <div class="hero__actions" data-reveal data-delay="340">
+          <a href="#monarch" class="btn btn--primary btn--lg" data-magnetic data-scramble-hover>Enter the Throne Room</a>
+          <a href="#realms" class="btn btn--ghost btn--lg" data-magnetic data-scramble-hover>Claim a Subdomain</a>
+        </div>
+
+        <div class="hero__meta" data-reveal data-delay="420">
+          <div class="countdown" aria-label="Time until the next decree">
+            <span class="countdown__label">NEXT DECREE IN</span>
+            <div class="countdown__clock" id="countdown">
+              <b><i id="cdD">00</i><small>D</small></b><em>:</em>
+              <b><i id="cdH">00</i><small>H</small></b><em>:</em>
+              <b><i id="cdM">00</i><small>M</small></b><em>:</em>
+              <b><i id="cdS">00</i><small>S</small></b>
+            </div>
+          </div>
+          <div class="hero__stats">
+            <div class="hstat"><b data-count="99.99" data-decimals="2" data-suffix="%">0%</b><span>Doom uptime</span></div>
+            <div class="hstat"><b data-count="4" data-suffix="">0</b><span>Realms online</span></div>
+            <div class="hstat"><b data-count="1" data-suffix="st">0</b><span>True monarch</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="marquee marquee--hero" aria-hidden="true">
+        <div class="marquee__track">
+          <span>DOOM IS INEVITABLE</span><i>✦</i><span>ALL HAIL DOOM</span><i>✦</i>
+          <span>LATVERIA FOREVER</span><i>✦</i><span>THERE IS NO DOOM BUT DOOM</span><i>✦</i>
+          <span>DOOM IS INEVITABLE</span><i>✦</i><span>ALL HAIL DOOM</span><i>✦</i>
+          <span>LATVERIA FOREVER</span><i>✦</i><span>THERE IS NO DOOM BUT DOOM</span><i>✦</i>
+        </div>
+      </div>
+
+      <a href="#monarch" class="scroll-hint" aria-label="Scroll down"><i></i></a>
+    </section>
+
+    <!-- ============ MONARCH ============ -->
+    <section class="section" id="monarch">
+      <div class="container">
+        <div class="split">
+          <div class="split__copy">
+            <span class="eyebrow" data-reveal>The Monarch</span>
+            <h2 class="h2" data-reveal data-delay="60">Victor Von Doom.<br /><span class="grad">Built by loss.</span> Ruled by will.</h2>
+            <p class="lead" data-reveal data-delay="120">
+              Born in the Latverian highlands, forged in the fire of a mother's soul and a
+              brother's blood. Doctor Victor Von Doom does not conquer — he <em>corrects</em>.
+              Every machine, every spell, every throne exists for one purpose: an ordered world
+              under one hand.
+            </p>
+            <p class="lead" data-reveal data-delay="180">
+              This site is his static terminal — served from a single box, resolved through
+              Route&nbsp;53, and immutable as his word.
+            </p>
+
+            <div class="stats stats--4">
+              <div class="stat" data-reveal data-delay="60"><b data-count="62" data-suffix="">0</b><span>Years on the throne</span></div>
+              <div class="stat" data-reveal data-delay="140"><b data-count="190" data-suffix="">0</b><span>Measured IQ</span></div>
+              <div class="stat" data-reveal data-delay="220"><b data-count="42" data-suffix="+">0</b><span>Realms subdued</span></div>
+              <div class="stat" data-reveal data-delay="300"><b data-count="0" data-suffix="">0</b><span>Defeats accepted</span></div>
+            </div>
+          </div>
+
+          <div class="split__visual" data-reveal data-delay="140">
+            <div class="panel panel--quote" data-tilt>
+              <div class="panel__bar"><i></i><i></i><i></i><span>throne_room.log</span></div>
+              <div class="panel__body">
+                <p class="term-line"><span class="t-dim">$</span> doom --status --realm=earth</p>
+                <p class="term-line t-dim">→ scanning 8,000,000 timelines........ <span class="t-green">done</span></p>
+                <p class="term-line t-dim">→ hostile actors detected............ <span class="t-amber">4</span></p>
+                <p class="term-line t-dim">→ doombot legion warm................ <span class="t-green">ready</span></p>
+                <p class="term-line t-dim">→ mystical wards (Vishanti).......... <span class="t-green">sealed</span></p>
+                <p class="term-line"><span class="t-green">✔ VERDICT</span>: doom wins in <span class="t-amber">∞</span> branches</p>
+                <blockquote class="quote-mark">
+                  "Doom rules. Doom conquers. Doom <span class="grad">prevails</span>."
+                </blockquote>
+                <p class="term-line t-dim">— logged by the Throne, cycle 2026.10</p>
+                <span class="caret" aria-hidden="true"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ARSENAL ============ -->
+    <section class="section section--alt" id="arsenal">
+      <div class="container">
+        <div class="section__head">
+          <span class="eyebrow" data-reveal>The Arsenal</span>
+          <h2 class="h2" data-reveal data-delay="60">Science on one shoulder.<br /><span class="grad">Sorcery on the other.</span></h2>
+          <p class="lead" data-reveal data-delay="120">Six pillars of absolute power. Hover to inspect — every module is hot-swappable by command of Doom.</p>
+        </div>
+
+        <div class="grid grid--3">
+          <article class="card" data-reveal data-tilt>
+            <div class="card__num">01</div>
+            <div class="card__icon" aria-hidden="true">☢</div>
+            <h3>Titanium Armor</h3>
+            <p>A crackle-field plated suit that shrugs off artillery, magic and the occasional Hulk. Self-repairing, always smiling.</p>
+            <span class="card__tag">DEFENSE · MAX</span>
+          </article>
+
+          <article class="card" data-reveal data-delay="70" data-tilt>
+            <div class="card__num">02</div>
+            <div class="card__icon" aria-hidden="true">⚙</div>
+            <h3>Doombot Legion</h3>
+            <p>Ten thousand identical geniuses. You defeat one, you've defeated a decoy. He's already ruling the country you just saved.</p>
+            <span class="card__tag">SWARM · ACTIVE</span>
+          </article>
+
+          <article class="card" data-reveal data-delay="140" data-tilt>
+            <div class="card__num">03</div>
+            <div class="card__icon" aria-hidden="true">🧠</div>
+            <h3>Genius Intellect</h3>
+            <p>Reed Richards' only equal. Builds time platforms before lunch, then invents a new lunch.</p>
+            <span class="card__tag">IQ · 190</span>
+          </article>
+
+          <article class="card" data-reveal data-delay="40" data-tilt>
+            <div class="card__num">04</div>
+            <div class="card__icon" aria-hidden="true">🔮</div>
+            <h3>Mystic Arts</h3>
+            <p>Student of the Cagliostro texts. Wards, bolts, and gateways — licensed by the Vishanti, enforced by Doom.</p>
+            <span class="card__tag">ARCANE · SEALED</span>
+          </article>
+
+          <article class="card" data-reveal data-delay="110" data-tilt>
+            <div class="card__num">05</div>
+            <div class="card__icon" aria-hidden="true">⏳</div>
+            <h3>Time Platform</h3>
+            <p>Arrives yesterday, wins today. Temporal logistics: Doom never misses a deadline he set for himself.</p>
+            <span class="card__tag">TEMPORAL · SYNC</span>
+          </article>
+
+          <article class="card" data-reveal data-delay="180" data-tilt>
+            <div class="card__num">06</div>
+            <div class="card__icon" aria-hidden="true">👑</div>
+            <h3>Battleworld Power</h3>
+            <p>Once held the power of a god and used it to file paperwork for an entire planet. Humility looks good on Doom.</p>
+            <div class="card__meter" aria-hidden="true"><i style="--w:96%"></i></div>
+            <span class="card__tag">OMEGA · 96%</span>
+          </article>
+        </div>
+      </div>
+
+      <div class="marquee marquee--rev" aria-hidden="true">
+        <div class="marquee__track">
+          <span>DOOMSDAY CLOCK</span><i>✦</i><span>MACHINA DOOM</span><i>✦</i><span>VON DOOM</span><i>✦</i>
+          <span>LATVERIAN DEFENSE GRID</span><i>✦</i><span>DOOMSDAY CLOCK</span><i>✦</i>
+          <span>MACHINA DOOM</span><i>✦</i><span>VON DOOM</span><i>✦</i><span>LATVERIAN DEFENSE GRID</span><i>✦</i>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ REIGN / TIMELINE ============ -->
+    <section class="section" id="reign">
+      <div class="container">
+        <div class="section__head">
+          <span class="eyebrow" data-reveal>The Reign</span>
+          <h2 class="h2" data-reveal data-delay="60">Six decades of <span class="grad">uninterrupted rule</span></h2>
+        </div>
+
+        <div class="timeline" id="timeline">
+          <div class="timeline__rail"><i id="timelineFill"></i></div>
+
+          <article class="tl" data-reveal>
+            <span class="tl__year">1962</span>
+            <div class="tl__body">
+              <h3>The Mask Is Forged</h3>
+              <p>A ruined face, a borrowed cloak, a country renamed. Doom takes the throne and never gives it back.</p>
+            </div>
+          </article>
+
+          <article class="tl" data-reveal>
+            <span class="tl__year">1966</span>
+            <div class="tl__body">
+              <h3>Latveria Declared</h3>
+              <p>Border skirmishes end the same day they begin. Trade routes re-route around Doom's flag by morning.</p>
+            </div>
+          </article>
+
+          <article class="tl" data-reveal>
+            <span class="tl__year">1977</span>
+            <div class="tl__body">
+              <h3>Triumph &amp; Torment</h3>
+              <p>Doom descends to save his mother's soul — and bargains with Mephisto like an accountant with a grudge.</p>
+            </div>
+          </article>
+
+          <article class="tl" data-reveal>
+            <span class="tl__year">2015</span>
+            <div class="tl__body">
+              <h3>God Emperor</h3>
+              <p>A patchwork planet called Battleworld, one throne, one god, one very specific accent.</p>
+            </div>
+          </article>
+
+          <article class="tl tl--now" data-reveal>
+            <span class="tl__year">NOW</span>
+            <div class="tl__body">
+              <h3>dooom.online</h3>
+              <p>The throne goes static. One EC2, four subdomains, zero downtime. <strong>Doom ships on schedule.</strong></p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ REALMS / SUBDOMAINS ============ -->
+    <section class="section section--alt" id="realms">
+      <div class="container">
+        <div class="section__head">
+          <span class="eyebrow" data-reveal>The Realms</span>
+          <h2 class="h2" data-reveal data-delay="60">Four subjects. <span class="grad">Four subdomains.</span></h2>
+          <p class="lead" data-reveal data-delay="120">
+            Each member of the court holds a fiefdom under <strong>dooom.online</strong>. Same
+            kingdom, separate thrones — all resolved through Route&nbsp;53.
+          </p>
+        </div>
+
+        <div class="grid grid--4 realms">
+          <a class="realm" href="https://a.dooom.online" data-reveal data-tilt>
+            <span class="realm__letter">A</span>
+            <h3>a.dooom.online</h3>
+            <p>Realm of the First Knight — front-end forge &amp; shader lab.</p>
+            <span class="realm__status"><i class="pulse-dot"></i>SECURE</span>
+            <span class="realm__go">Visit realm →</span>
+          </a>
+
+          <a class="realm" href="https://b.dooom.online" data-reveal data-delay="70" data-tilt>
+            <span class="realm__letter">B</span>
+            <h3>b.dooom.online</h3>
+            <p>Realm of the Iron Scribe — APIs, daemons and dark automation.</p>
+            <span class="realm__status"><i class="pulse-dot"></i>SECURE</span>
+            <span class="realm__go">Visit realm →</span>
+          </a>
+
+          <a class="realm" href="https://c.dooom.online" data-reveal data-delay="140" data-tilt>
+            <span class="realm__letter">C</span>
+            <h3>c.dooom.online</h3>
+            <p>Realm of the Green Warden — data vaults and mystic archives.</p>
+            <span class="realm__status"><i class="pulse-dot"></i>SECURE</span>
+            <span class="realm__go">Visit realm →</span>
+          </a>
+
+          <a class="realm" href="https://d.dooom.online" data-reveal data-delay="210" data-tilt>
+            <span class="realm__letter">D</span>
+            <h3>d.dooom.online</h3>
+            <p>Realm of the Fourth Hand — ops, dashboards and the war room.</p>
+            <span class="realm__status"><i class="pulse-dot"></i>SECURE</span>
+            <span class="realm__go">Visit realm →</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ OATH / CTA ============ -->
+    <section class="section" id="oath">
+      <div class="container">
+        <div class="oath" data-reveal>
+          <div class="oath__bg" aria-hidden="true"></div>
+          <span class="eyebrow eyebrow--light">The Oath</span>
+          <h2 class="h2">Kneel, and be <span class="grad">counted</span>.</h2>
+          <p class="lead">Enter your name, subject. Doom remembers everything — especially volunteers.</p>
+
+          <form class="oath__form" id="oathForm" novalidate>
+            <input type="text" id="oathName" placeholder="Your name, mortal…" aria-label="Your name" autocomplete="off" maxlength="32" />
+            <button type="submit" class="btn btn--primary btn--lg" data-magnetic data-scramble-hover>Kneel</button>
+          </form>
+          <p class="oath__note" id="oathNote" role="status"></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <a href="#home" class="brand">
+          <span class="brand__glyph" aria-hidden="true">D</span>
+          <span class="brand__name">DOOM</span><span class="brand__tld">.online</span>
+        </a>
+        <p>The static throne. Served with contempt and excellent caching headers.</p>
+        <div class="footer__sys">
+          <span><i class="pulse-dot"></i> dOOms.net:53 OK</span>
+          <span>APEX → EC2 OK</span>
+        </div>
+      </div>
+
+      <div class="footer__cols">
+        <div>
+          <h4>Kingdom</h4>
+          <a href="#monarch">Monarch</a><a href="#arsenal">Arsenal</a>
+          <a href="#reign">Reign</a><a href="#realms">Realms</a>
+        </div>
+        <div>
+          <h4>Realms</h4>
+          <a href="https://a.dooom.online">a.dooom.online</a>
+          <a href="https://b.dooom.online">b.dooom.online</a>
+          <a href="https://c.dooom.online">c.dooom.online</a>
+          <a href="https://d.dooom.online">d.dooom.online</a>
+        </div>
+        <div>
+          <h4>Protocol</h4>
+          <a href="#oath">Docker · nginx</a><a href="#oath">Apache :80</a>
+          <a href="#oath">Route 53</a><a href="#oath">Let's Encrypt</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer__bottom">
+      <span>© 2026 The Latverian State · All kneeled.</span>
+      <span>Built with pure willpower, vanilla JS &amp; CSS</span>
+    </div>
+  </footer>
+
+  <button class="to-top" id="toTop" aria-label="Back to top">↑</button>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
