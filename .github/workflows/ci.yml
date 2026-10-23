@@ -1,0 +1,25 @@
+name: CI Pipeline
+
+on:
+  push:
+
+jobs:
+  build:
+    name: Validate Source Code
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Display repository information
+        run: |
+          echo "GitHub Actions workflow started"
+          echo "Repository: $GITHUB_REPOSITORY"
+          echo "Branch: $GITHUB_REF_NAME"
+
+      - name: List repository files
+        run: ls -la
+
+      - name: Validate workflow execution
+        run: echo "CI pipeline executed successfully"
